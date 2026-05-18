@@ -21,28 +21,21 @@ int	count_words(char const *s, char c)
 	return (res);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	unsigned char *d_ptr;
-	unsigned char *s_ptr;
-	
-	if (!dest && !src)
-		return (NULL);
-	d_ptr = (void *)dest;
-	s_ptr = (void *)src;
-	while (n--)
-		*d_ptr++ = (unsigned char)*s_ptr++;
-	return (dest);
-}
-
 char	*ft_strdup(const char *s, size_t len)
 {
 	char	*res;
+	size_t	i;
 	
 	res = malloc(len + 1);
 	if (!res)
 		return (NULL);
-	ft_memcpy(res, s, len + 1);
+	i = 0;
+	while (i < len)
+	{
+		res[i] = s[i];
+		i++;
+	}
+	res[i] = '\0';
 	return (res);
 }
 

@@ -35,3 +35,18 @@ void	append_node(t_stack **stack, int nbr)
 		new_node->prev = last_node;
 	}
 }
+
+int	get_stack_len(t_stack *stack)
+{
+	int	len;
+
+	if (!stack)
+		return (0);
+	len = 0;
+	while (stack)
+	{
+		len++;
+		stack = stack->next;
+	}
+	return (len);
+}

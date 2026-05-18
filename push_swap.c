@@ -3,7 +3,7 @@
 int	main(int args, char **argv)
 {
 	t_stack	*a = NULL;
-	//t_stack	*b;
+	// t_stack	*b = NULL;
 
 	if (args == 1 || (args == 2 && !argv[1][0]))
 	{
@@ -13,11 +13,15 @@ int	main(int args, char **argv)
 	else if (args == 2)
 		argv = ft_split(argv[1], ' ');
 	stack_init(&a, argv + 1);
-	ft_printf("compiles\n");
-	/*while (a)
+
+	rra(a, 1);
+	sa(a, 1);
+	ra(a, 2);
+
+	while (a)
 	{
 		ft_printf("%d\n", a->value);
 		a = a->next;
-	}*/
+	}
 	return (0);
 }

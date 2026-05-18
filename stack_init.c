@@ -56,10 +56,12 @@ void	stack_init(t_stack **a, char **argv)
 		nbr = ft_atol(*argv);
 		if (nbr > INT_MAX || nbr < INT_MIN)
 		{
+			ft_printf("Error\n");
 			return ; //error_free
 		}
 		if (error_repetition(*a, (int)nbr))
 		{
+			ft_printf("Error\n");
 			return ; //error_free
 		}
 		append_node(a, (int)nbr);
