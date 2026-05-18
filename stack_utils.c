@@ -2,6 +2,8 @@
 
 t_stack *ft_stacklast(t_stack *a)
 {
+	if (!a)
+		return (NULL);
 	while (a->next)
 		a = a->next;
 	return (a);
@@ -27,6 +29,8 @@ void	append_node(t_stack **stack, int nbr)
 	else
 	{
 		last_node = ft_stacklast(*stack);
+		if (!last_node)
+			return ;
 		last_node->next = new_node;
 		new_node->prev = last_node;
 	}
