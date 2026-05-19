@@ -2,8 +2,8 @@
 
 int	main(int args, char **argv)
 {
-	t_stack	*a = NULL;
-	// t_stack	*b = NULL;
+	t_stack *a = NULL;
+	t_stack *b = NULL;
 
 	if (args == 1 || (args == 2 && !argv[1][0]))
 	{
@@ -14,14 +14,14 @@ int	main(int args, char **argv)
 		argv = ft_split(argv[1], ' ');
 	stack_init(&a, argv + 1);
 
-	rra(a, 1);
 	sa(a, 1);
-	ra(a, 2);
+	pb(&b, &a, 1);
 
 	while (a)
 	{
 		ft_printf("%d\n", a->value);
 		a = a->next;
 	}
+	// ft_printf("\nstack: b : %d\n", b->value);
 	return (0);
 }

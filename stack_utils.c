@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/19 19:02:08 by avalchuk          #+#    #+#             */
+/*   Updated: 2026/05/19 19:02:08 by avalchuk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-t_stack *ft_stacklast(t_stack *a)
+t_stack	*ft_stacklast(t_stack *a)
 {
 	if (!a)
 		return (NULL);
@@ -30,7 +42,10 @@ void	append_node(t_stack **stack, int nbr)
 	{
 		last_node = ft_stacklast(*stack);
 		if (!last_node)
+		{
+			free(new_node);
 			return ;
+		}
 		last_node->next = new_node;
 		new_node->prev = last_node;
 	}

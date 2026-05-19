@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_init.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/19 19:02:02 by avalchuk          #+#    #+#             */
+/*   Updated: 2026/05/19 19:02:03 by avalchuk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 long	ft_atol(const char *nptr)
 {
 	long	res;
-	int	sign;
-	int	i;
+	int		sign;
+	int		i;
 
 	i = 0;
 	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
@@ -29,7 +41,6 @@ long	ft_atol(const char *nptr)
 {
 	return (1);
 }*/
-
 int	error_repetition(t_stack *a, int nbr)
 {
 	if (!a)
@@ -43,26 +54,46 @@ int	error_repetition(t_stack *a, int nbr)
 	return (0);
 }
 
+/*void	error_free(t_stack **stack, char **argv, int args)
+{
+	t_stack	*temp;
+	int		i;
+
+	while (*stack)
+	{
+		temp = (*stack)->next;
+		free((*stack));
+		*stack = temp;
+	}
+	i = 0;
+	while (i < args)
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+}*/
+
 void	stack_init(t_stack **a, char **argv)
 {
 	long	nbr;
-	//int		i;
 
-	//i = 0;
+	// int		i;
+	// i = 0;
 	while (*argv)
 	{
-		//if (error_syntax(argv[i])) // not done
+		// if (error_syntax(argv[i])) // not done
 		//	return ; //error_free
 		nbr = ft_atol(*argv);
 		if (nbr > INT_MAX || nbr < INT_MIN)
 		{
 			ft_printf("Error\n");
-			return ; //error_free
+			return ; // error_free
 		}
 		if (error_repetition(*a, (int)nbr))
 		{
 			ft_printf("Error\n");
-			return ; //error_free
+			return ; // error_free
 		}
 		append_node(a, (int)nbr);
 		argv++;

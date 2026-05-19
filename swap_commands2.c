@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   swap_commands2.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/19 19:02:17 by avalchuk          #+#    #+#             */
+/*   Updated: 2026/05/19 19:02:18 by avalchuk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	sb(t_stack *b, int display)
 {
 	int	temp;
 
-	if (!b)
+	if (!b || !b->next)
 		return ;
 	temp = b->value;
 	b->value = b->next->value;
@@ -13,72 +25,58 @@ void	sb(t_stack *b, int display)
 		write(1, "sb\n", 3);
 }
 
-void	pb(t_stack *b, t_stack *a, int display)
+void	pb(t_stack **b, t_stack **a, int display)
 {
-	t_stack	*last_a;
-	t_stack	*last_b;
-	int		temp;
+	t_stack	*temp;
 
-	if (!a || !b)
+	if (!a || !*a)
 		return ;
-	last_a = ft_stacklast(a);
-	last_b = ft_stacklast(b);
-	if (!last_a || !last_b)
-		return ;
-	temp = last_b->value;
-	last_b->value = last_a->value;
-	last_a->value = temp;
+	temp = *a;
+	*a = (*a)->next;
+	if (*a)
+		(*a)->prev = NULL;
+	temp->next = *b;
+	temp->prev = NULL;
+	if (*b)
+		(*b)->prev = temp;
+	*b = temp;
 	if (display)
 		write(1, "pb\n", 3);
 }
 
 void	rb(t_stack *b, int display)
 {
-	t_stack	*last;
-	int		temp;
+	int	temp;
 
 	if (!b)
 		return ;
-	last = ft_stacklast(b);
-	if (!last)
-		return ;
 	temp = b->value;
-	b->value = last->value;
-	last->value = temp;
+	while (b->next)
+	{
+		b->value = b->next->value;
+		b = b->next;
+	}
+	b->value = temp;
 	if (display)
 		write(1, "rb\n", 3);
 }
 
 void	rrb(t_stack *b, int display)
 {
-	int	tmp;
+	int	temp;
 
 	if (!b)
 		return ;
-	tmp = b->value;
-	while (b->next)
+	b = ft_stacklast(b);
+	if (!b)
+		return ;
+	temp = b->value;
+	while (b->prev)
 	{
-		b->value = b->next->value;
-		b = b->next;
+		b->value = b->prev->value;
+		b = b->prev;
 	}
-	b->value = tmp;
+	b->value = temp;
 	if (display)
 		write(1, "rrb\n", 4);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
