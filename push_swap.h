@@ -29,6 +29,7 @@ typedef struct s_stack
 
 long				ft_atol(const char *nptr);
 int					error_repetition(t_stack *a, int nbr);
+void				error_free(t_stack **a, char **argv);
 void				stack_init(t_stack **a, char **argv);
 
 // stack_utils

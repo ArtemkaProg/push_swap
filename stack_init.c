@@ -54,7 +54,7 @@ int	error_repetition(t_stack *a, int nbr)
 	return (0);
 }
 
-/*void	error_free(t_stack **stack, char **argv, int args)
+void	error_free(t_stack **stack, char **argv)
 {
 	t_stack	*temp;
 	int		i;
@@ -66,13 +66,13 @@ int	error_repetition(t_stack *a, int nbr)
 		*stack = temp;
 	}
 	i = 0;
-	while (i < args)
+	while (argv[i])
 	{
 		free(argv[i]);
 		i++;
 	}
 	free(argv);
-}*/
+}
 
 void	stack_init(t_stack **a, char **argv)
 {
@@ -88,12 +88,14 @@ void	stack_init(t_stack **a, char **argv)
 		if (nbr > INT_MAX || nbr < INT_MIN)
 		{
 			ft_printf("Error\n");
-			return ; // error_free
+			error_free(a, argv);
+			return ;
 		}
 		if (error_repetition(*a, (int)nbr))
 		{
 			ft_printf("Error\n");
-			return ; // error_free
+			error_free(a, argv);
+			return ;
 		}
 		append_node(a, (int)nbr);
 		argv++;
