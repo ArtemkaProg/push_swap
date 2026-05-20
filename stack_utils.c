@@ -6,7 +6,7 @@
 /*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 19:02:08 by avalchuk          #+#    #+#             */
-/*   Updated: 2026/05/19 19:02:08 by avalchuk         ###   ########.fr       */
+/*   Updated: 2026/05/20 15:45:27 by avalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	append_node(t_stack **stack, int nbr)
 	}
 }
 
-int	get_stack_len(t_stack *stack)
+int	stack_len(t_stack *stack)
 {
 	int	len;
 

@@ -6,7 +6,7 @@
 /*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 19:01:50 by avalchuk          #+#    #+#             */
-/*   Updated: 2026/05/19 19:01:51 by avalchuk         ###   ########.fr       */
+/*   Updated: 2026/05/20 15:45:10 by avalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,22 @@ typedef struct s_stack
 	int				index;
 	struct s_stack	*prev;
 	struct s_stack	*next;
+	struct s_stack	*target_node;
 }					t_stack;
 
 // stack_initialisation
 
 long				ft_atol(const char *nptr);
 int					error_repetition(t_stack *a, int nbr);
-void				error_free(t_stack **a, char **argv);
-void				stack_init(t_stack **a, char **argv);
+void				free_split(char **argv);
+void				free_stack(t_stack **stack);
+void				stack_init(t_stack **a, char **split);
 
 // stack_utils
 
 t_stack				*ft_stacklast(t_stack *a);
 void				append_node(t_stack **stack, int nbr);
-int					get_stack_len(t_stack *stack);
+int					stack_len(t_stack *stack);
 
 // swap_comands
 
@@ -57,5 +59,11 @@ void				rrr(t_stack *a, t_stack *b, int display);
 // split
 
 char				**ft_split(char const *s, char c);
+
+// sorting
+
+int	check_sort(t_stack *a);
+int compute_disorder(t_stack *a);
+void	simple_sort(t_stack *a); //, t_stack **b);
 
 #endif

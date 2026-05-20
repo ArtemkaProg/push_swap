@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 PRINTF = ft_printf/libftprintf.a
 
-SRCS = push_swap.c stack_init.c stack_utils.c split.c swap_commands.c swap_commands2.c swap_commands3.c
+SRCS = push_swap.c stack_init.c stack_utils.c split.c swap_commands.c swap_commands2.c swap_commands3.c utils.c sort.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(PRINTF) $(NAME)
@@ -14,7 +14,7 @@ $(PRINTF):
 	make -C ft_printf
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) -o $(NAME)
 
 clean:
 	make -C ft_printf clean

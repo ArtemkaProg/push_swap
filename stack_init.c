@@ -6,41 +6,17 @@
 /*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 19:02:02 by avalchuk          #+#    #+#             */
-/*   Updated: 2026/05/19 19:02:03 by avalchuk         ###   ########.fr       */
+/*   Updated: 2026/05/20 12:38:26 by avalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long	ft_atol(const char *nptr)
-{
-	long	res;
-	int		sign;
-	int		i;
-
-	i = 0;
-	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
-		i++;
-	sign = 1;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	res = 0;
-	while (nptr[i] && nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		res = res * 10 + (nptr[i] - '0');
-		i++;
-	}
-	return (res * sign);
-}
-
 /*int	error_syntax(char *nbr)
 {
 	return (1);
 }*/
+
 int	error_repetition(t_stack *a, int nbr)
 {
 	if (!a)
@@ -54,50 +30,56 @@ int	error_repetition(t_stack *a, int nbr)
 	return (0);
 }
 
-void	error_free(t_stack **stack, char **argv)
+void	free_stack(t_stack **stack)
 {
 	t_stack	*temp;
-	int		i;
-
+	
 	while (*stack)
 	{
 		temp = (*stack)->next;
-		free((*stack));
+		free(*stack);
 		*stack = temp;
 	}
-	i = 0;
-	while (argv[i])
-	{
-		free(argv[i]);
-		i++;
-	}
-	free(argv);
+	*stack = NULL;
 }
 
-void	stack_init(t_stack **a, char **argv)
+void	free_split(char **split)
+{
+	int		i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+void	stack_init(t_stack **a, char **split)
 {
 	long	nbr;
-
 	// int		i;
-	// i = 0;
-	while (*argv)
+
+	// i = 0;	
+	while (*split)
 	{
 		// if (error_syntax(argv[i])) // not done
 		//	return ; //error_free
-		nbr = ft_atol(*argv);
+		nbr = ft_atol(*split);
 		if (nbr > INT_MAX || nbr < INT_MIN)
 		{
-			ft_printf("Error\n");
-			error_free(a, argv);
+			ft_printf("Error: overflows int\n");
+			free_stack(a);
 			return ;
 		}
 		if (error_repetition(*a, (int)nbr))
 		{
-			ft_printf("Error\n");
-			error_free(a, argv);
+			ft_printf("Error: repetition\n");
+			free_stack(a);
 			return ;
 		}
 		append_node(a, (int)nbr);
-		argv++;
+		split++;
 	}
 }
