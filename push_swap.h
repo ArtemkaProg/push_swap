@@ -20,7 +20,10 @@
 typedef struct s_stack
 {
 	int				value;
-	int				index;
+	int				current_position;
+	int				push_price;
+	int				above_median;
+	int				cheapest;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 	struct s_stack	*target_node;
@@ -62,8 +65,8 @@ char				**ft_split(char const *s, char c);
 
 // sorting
 
-int	check_sort(t_stack *a);
-int compute_disorder(t_stack *a);
-void	simple_sort(t_stack *a); //, t_stack **b);
+int		check_sort(t_stack *a);
+int		compute_disorder(t_stack *a);
+void	tiny_sort(t_stack *a);
 
 #endif

@@ -1,5 +1,7 @@
 #include "push_swap.h"
 
+
+
 int	main(int args, char **argv)
 {
 	t_stack *a = NULL;
@@ -29,7 +31,7 @@ int	main(int args, char **argv)
 	ft_printf("Disorder: %d\n\n", compute_disorder(a));
 	if (!is_sorted && stack_len(a) <= 3)
 	{
-		simple_sort(a);
+		tiny_sort(a);
 		ft_printf("\n");
 	}
 	ft_printf("stack a:\n");

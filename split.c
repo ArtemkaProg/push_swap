@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	count_words(char const *s, char c)
+static int	count_words(char const *s, char c)
 {
 	int	res;
 	int	i;
@@ -33,7 +33,7 @@ int	count_words(char const *s, char c)
 	return (res);
 }
 
-char	*ft_strdup(const char *s, size_t len)
+static char	*ft_strdup(const char *s, size_t len)
 {
 	char	*res;
 	size_t	i;
