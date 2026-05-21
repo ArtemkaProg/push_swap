@@ -44,39 +44,38 @@ void	pb(t_stack **b, t_stack **a, int display)
 		write(1, "pb\n", 3);
 }
 
-void	rb(t_stack *b, int display)
+void	rb(t_stack **b, int display)
 {
-	int	temp;
+	t_stack	*first;
+	t_stack	*last;
 
-	if (!b)
+	if (!b || !*b || !(*b)->next)
 		return ;
-	temp = b->value;
-	while (b->next)
-	{
-		b->value = b->next->value;
-		b = b->next;
-	}
-	b->value = temp;
+	first = *b;
+	last = ft_stacklast(*b);
+	*b = first->next;
+	(*b)->prev = NULL;
+	first->next = NULL;
+	first->prev = last;
+	last->next = first;
 	if (display)
 		write(1, "rb\n", 3);
 }
 
-void	rrb(t_stack *b, int display)
+void	rrb(t_stack **b, int display)
 {
-	int	temp;
+	t_stack	*first;
+	t_stack	*last;
 
-	if (!b)
+	if (!b || !*b || !(*b)->next)
 		return ;
-	b = ft_stacklast(b);
-	if (!b)
-		return ;
-	temp = b->value;
-	while (b->prev)
-	{
-		b->value = b->prev->value;
-		b = b->prev;
-	}
-	b->value = temp;
+	last = ft_stacklast(*b);
+	first = *b;
+	last->prev->next = NULL;
+	last->prev = NULL;
+	last->next = first;
+	first->prev = last;
+	*b = last;
 	if (display)
 		write(1, "rrb\n", 4);
 }

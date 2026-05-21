@@ -47,17 +47,17 @@ int					stack_len(t_stack *stack);
 
 void				sa(t_stack *a, int display);
 void				pa(t_stack **a, t_stack **b, int display);
-void				ra(t_stack *a, int display);
-void				rra(t_stack *a, int display);
+void				ra(t_stack **a, int display);
+void				rra(t_stack **a, int display);
 
 void				sb(t_stack *b, int display);
 void				pb(t_stack **b, t_stack **a, int display);
-void				rb(t_stack *b, int display);
-void				rrb(t_stack *b, int display);
+void				rb(t_stack **b, int display);
+void				rrb(t_stack **b, int display);
 
 void				ss(t_stack *a, t_stack *b, int display);
-void				rr(t_stack *a, t_stack *b, int display);
-void				rrr(t_stack *a, t_stack *b, int display);
+void				rr(t_stack **a, t_stack **b, int display);
+void				rrr(t_stack **a, t_stack **b, int display);
 
 // split
 
@@ -65,8 +65,28 @@ char				**ft_split(char const *s, char c);
 
 // sorting
 
+void		push_swap(t_stack **a, t_stack **b);
 int		check_sort(t_stack *a);
 int		compute_disorder(t_stack *a);
-void	tiny_sort(t_stack *a);
+void	tiny_sort(t_stack **a);
+
+//// medium_sort
+
+void	medium_sort(t_stack **a, t_stack **b, int len_a);
+void	finish_rotation(t_stack **stack, t_stack *top_node, char stack_name);
+void	move_nodes(t_stack **a, t_stack **b);
+t_stack	*find_smallest(t_stack *a);
+t_stack	*find_highest(t_stack *a);
+t_stack	*return_cheapest(t_stack *b);
+void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
+void	reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
+
+// push_swap init
+
+void	init_nodes(t_stack *a, t_stack *b);
+void	set_current_position(t_stack *stack);
+void	set_target_node(t_stack *a, t_stack *b);
+void	set_price(t_stack *a, t_stack *b);
+void	set_cheapest(t_stack *b);
 
 #endif

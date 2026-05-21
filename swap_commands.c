@@ -31,52 +31,51 @@ void	pa(t_stack **a, t_stack **b, int display)
 
 	if (!b || !*b)
 		return ;
-	temp = *a;
-	*a = (*a)->next;
-	if (*a)
-		(*a)->prev = NULL;
-	temp->next = *b;
-	temp->prev = NULL;
+	temp = *b;
+	*b = (*b)->next;
 	if (*b)
-		(*b)->prev = temp;
-	*b = temp;
+		(*b)->prev = NULL;
+	temp->next = *a;
+	temp->prev = NULL;
+	if (*a)
+		(*a)->prev = temp;
+	*a = temp;
 	if (display)
 		write(1, "pa\n", 3);
 }
 
-void	ra(t_stack *a, int display)
+void	ra(t_stack **a, int display)
 {
-	int	temp;
+	t_stack	*first;
+	t_stack	*last;
 
-	if (!a)
+	if (!a || !*a || !(*a)->next)
 		return ;
-	temp = a->value;
-	while (a->next)
-	{
-		a->value = a->next->value;
-		a = a->next;
-	}
-	a->value = temp;
+	first = *a;
+	last = ft_stacklast(*a);
+	*a = first->next;
+	(*a)->prev = NULL;
+	first->next = NULL;
+	first->prev = last;
+	last->next = first;
 	if (display)
 		write(1, "ra\n", 3);
 }
 
-void	rra(t_stack *a, int display)
+void	rra(t_stack **a, int display)
 {
-	int	temp;
+	t_stack	*first;
+	t_stack	*last;
 
-	if (!a)
+	if (!a || !*a || !(*a)->next)
 		return ;
-	a = ft_stacklast(a);
-	if (!a)
-		return ;
-	temp = a->value;
-	while (a->prev)
-	{
-		a->value = a->prev->value;
-		a = a->prev;
-	}
-	a->value = temp;
+	last = ft_stacklast(*a);
+	first = *a;
+	last->prev->next = NULL;
+	last->prev = NULL;
+	last->next = first;
+	first->prev = last;
+	*a = last;
 	if (display)
 		write(1, "rra\n", 4);
 }

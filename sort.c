@@ -36,7 +36,7 @@ int	check_sort(t_stack *a)
 	return (1);
 }
 
-static t_stack	*find_highest(t_stack *a)
+t_stack	*find_highest(t_stack *a)
 {
 	t_stack	*highest;
 
@@ -50,7 +50,7 @@ static t_stack	*find_highest(t_stack *a)
 	return (highest);
 }
 
-static t_stack	*find_smallest(t_stack *a)
+t_stack	*find_smallest(t_stack *a)
 {
 	t_stack	*smallest;
 
@@ -64,20 +64,20 @@ static t_stack	*find_smallest(t_stack *a)
 	return (smallest);
 }
 
-void	tiny_sort(t_stack *a) // <= 3 elements
+void	tiny_sort(t_stack **a) // <= 3 elements
 {
 	t_stack	*highest_node;
 
-	highest_node = find_highest(a);
-	if (a == highest_node)
+	highest_node = find_highest(*a);
+	if (*a == highest_node)
 		ra(a, 1);
-	else if (a->next == highest_node)
+	else if ((*a)->next == highest_node)
 		rra(a, 1);
-	if (a->value > a->next->value)
-		sa(a, 1);
+	if ((*a)->value > (*a)->next->value)
+		sa(*a, 1);
 }
 
-void	set_target_node(t_stack *a, t_stack *b)
+/*void	set_target_node(t_stack *a, t_stack *b)
 {
 	t_stack	*current_a;
 	t_stack	*target_node;
@@ -103,7 +103,7 @@ void	set_target_node(t_stack *a, t_stack *b)
 			b->target_node = target_node;
 		b = b->next;
 	}
-}
+}*/
 
 /*void	medium_sort(t_stack **a, t_stack **b)
 {
