@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void display_stacks(t_stack *a, t_stack *b)
+void	display_stacks(t_stack *a, t_stack *b)
 {
 	ft_printf("stack a:\n");
 	while (a)
@@ -32,8 +32,10 @@ void	push_swap(t_stack **a, t_stack **b)
 		tiny_sort(a);
 	else if (len_a > 3 && len_a <= 5)
 		(void)b; // handle_five 
-	else if (len_a > 5)
+	else if (len_a > 5 && len_a <= 10)
 		medium_sort(a, b, len_a);
+	else
+		radix_sort(a, b);
 }
 
 int	main(int args, char **argv)

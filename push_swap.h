@@ -6,7 +6,7 @@
 /*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 19:01:50 by avalchuk          #+#    #+#             */
-/*   Updated: 2026/05/20 15:45:10 by avalchuk         ###   ########.fr       */
+/*   Updated: 2026/05/22 15:42:53 by avalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <limits.h>
 # include <stdlib.h>
 
+
+
 typedef struct s_stack
 {
 	int				value;
@@ -24,6 +26,7 @@ typedef struct s_stack
 	int				push_price;
 	int				above_median;
 	int				cheapest;
+	int				index;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 	struct s_stack	*target_node;
@@ -95,5 +98,13 @@ void	reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
 void	medium_sort(t_stack **a, t_stack **b, int len_a);
 void	move_nodes(t_stack **a, t_stack **b);
 t_stack	*return_cheapest(t_stack *b);
+
+
+////// RADIX SORTING //////
+
+void    radix_sort(t_stack **a, t_stack **b);
+void    fill_array(t_stack *a, int *tab);
+void	asign_indexes(t_stack *a, int *tab, int len);
+void	sort_array(int *tab, int len);
 
 #endif

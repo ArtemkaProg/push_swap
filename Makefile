@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 PRINTF = ft_printf/libftprintf.a
 
-SRCS = push_swap.c stack_init.c stack_utils.c swap_commands.c swap_commands2.c swap_commands3.c utils.c sort.c medium_init.c medium_rotate.c medium_sort.c
+SRCS = push_swap.c stack_init.c stack_utils.c swap_commands.c swap_commands2.c swap_commands3.c utils.c sort.c medium_init.c medium_rotate.c medium_sort.c radix_sort.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(PRINTF) $(NAME)
