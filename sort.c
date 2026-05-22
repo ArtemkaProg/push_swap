@@ -74,7 +74,7 @@ void	tiny_sort(t_stack **a) // <= 3 elements
 	else if ((*a)->next == highest_node)
 		rra(a, 1);
 	if ((*a)->value > (*a)->next->value)
-		sa(*a, 1);
+		sa(a, 1);
 }
 
 /*void	set_target_node(t_stack *a, t_stack *b)

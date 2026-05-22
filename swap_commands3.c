@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	ss(t_stack *a, t_stack *b, int display)
+void	ss(t_stack **a, t_stack **b, int display)
 {
 	sa(a, 0);
 	sb(b, 0);

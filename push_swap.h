@@ -45,17 +45,17 @@ int					stack_len(t_stack *stack);
 
 // swap_comands
 
-void				sa(t_stack *a, int display);
+void				sa(t_stack **a, int display);
 void				pa(t_stack **a, t_stack **b, int display);
 void				ra(t_stack **a, int display);
 void				rra(t_stack **a, int display);
 
-void				sb(t_stack *b, int display);
+void				sb(t_stack **b, int display);
 void				pb(t_stack **b, t_stack **a, int display);
 void				rb(t_stack **b, int display);
 void				rrb(t_stack **b, int display);
 
-void				ss(t_stack *a, t_stack *b, int display);
+void				ss(t_stack **a, t_stack **b, int display);
 void				rr(t_stack **a, t_stack **b, int display);
 void				rrr(t_stack **a, t_stack **b, int display);
 

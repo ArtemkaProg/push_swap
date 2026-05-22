@@ -6,22 +6,28 @@
 /*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 19:02:13 by avalchuk          #+#    #+#             */
-/*   Updated: 2026/05/19 19:02:15 by avalchuk         ###   ########.fr       */
+/*   Updated: 2026/05/22 13:10:46 by avalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_stack *a, int display)
+void	sa(t_stack **a, int display)
 {
-	int	temp;
+	t_stack	*first;
+	t_stack	*second;
 
-	if (!a || !a->next)
+	if (!a || !(*a) || !(*a)->next)
 		return ;
-	temp = a->value;
-	a->value = a->next->value;
-	a->next->value = temp;
-	if (display)
+	first = (*a);
+	second = first->next;
+	first->next = second->next;
+	first->prev = second;
+	if (second->prev)
+		second->next->prev = first;
+	second->next = first;
+	second->prev = NULL;
+	if (display)*a = second;
 		write(1, "sa\n", 3);
 }
 
