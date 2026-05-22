@@ -21,6 +21,34 @@ t_stack	*ft_stacklast(t_stack *a)
 	return (a);
 }
 
+t_stack	*find_highest(t_stack *a)
+{
+	t_stack	*highest;
+
+	highest = a;
+	while (a)
+	{
+		if (a->value > highest->value)
+			highest = a;
+		a = a->next;
+	}
+	return (highest);
+}
+
+t_stack	*find_smallest(t_stack *a)
+{
+	t_stack	*smallest;
+
+	smallest = a;
+	while (a)
+	{
+		if (a->value < smallest->value)
+			smallest = a;
+		a = a->next;
+	}
+	return (smallest);
+}
+
 void	append_node(t_stack **stack, int nbr)
 {
 	t_stack	*last_node;

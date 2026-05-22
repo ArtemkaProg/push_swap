@@ -29,21 +29,27 @@ typedef struct s_stack
 	struct s_stack	*target_node;
 }					t_stack;
 
-// stack_initialisation
+// utils.c
 
+char				**ft_split(char const *s, char c);
 long				ft_atol(const char *nptr);
+
+// stack_init.c
+
 int					error_repetition(t_stack *a, int nbr);
 void				free_split(char **argv);
 void				free_stack(t_stack **stack);
 void				stack_init(t_stack **a, char **split);
 
-// stack_utils
+// stack_utils.c
 
 t_stack				*ft_stacklast(t_stack *a);
 void				append_node(t_stack **stack, int nbr);
 int					stack_len(t_stack *stack);
+t_stack				*find_smallest(t_stack *a);
+t_stack				*find_highest(t_stack *a);
 
-// swap_comands
+// swap_commands*.c
 
 void				sa(t_stack **a, int display);
 void				pa(t_stack **a, t_stack **b, int display);
@@ -59,34 +65,35 @@ void				ss(t_stack **a, t_stack **b, int display);
 void				rr(t_stack **a, t_stack **b, int display);
 void				rrr(t_stack **a, t_stack **b, int display);
 
-// split
-
-char				**ft_split(char const *s, char c);
-
-// sorting
+// sort.c
 
 void		push_swap(t_stack **a, t_stack **b);
 int		check_sort(t_stack *a);
 int		compute_disorder(t_stack *a);
 void	tiny_sort(t_stack **a);
 
-//// medium_sort
 
-void	medium_sort(t_stack **a, t_stack **b, int len_a);
-void	finish_rotation(t_stack **stack, t_stack *top_node, char stack_name);
-void	move_nodes(t_stack **a, t_stack **b);
-t_stack	*find_smallest(t_stack *a);
-t_stack	*find_highest(t_stack *a);
-t_stack	*return_cheapest(t_stack *b);
-void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
-void	reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
+////// MEDIUM SORTING //////
 
-// push_swap init
+
+// medium_init.c
 
 void	init_nodes(t_stack *a, t_stack *b);
 void	set_current_position(t_stack *stack);
 void	set_target_node(t_stack *a, t_stack *b);
 void	set_price(t_stack *a, t_stack *b);
 void	set_cheapest(t_stack *b);
+
+// medium rotating.c
+
+void	finish_rotation(t_stack **stack, t_stack *top_node, char stack_name);
+void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
+void	reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
+
+// medium_sort.c
+
+void	medium_sort(t_stack **a, t_stack **b, int len_a);
+void	move_nodes(t_stack **a, t_stack **b);
+t_stack	*return_cheapest(t_stack *b);
 
 #endif
