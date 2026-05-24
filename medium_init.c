@@ -21,7 +21,7 @@ void	set_current_position(t_stack *stack)
 	}
 }
 
-void	set_target_node(t_stack *a, t_stack *b)
+static void	set_target_node(t_stack *a, t_stack *b)
 {
 	t_stack	*current_a;
 	t_stack	*target_node;
@@ -49,7 +49,7 @@ void	set_target_node(t_stack *a, t_stack *b)
 	}
 }
 
-void	set_price(t_stack *a, t_stack *b)
+static void	set_price(t_stack *a, t_stack *b)
 {
 	int	len_a;
 	int	len_b;
@@ -69,7 +69,7 @@ void	set_price(t_stack *a, t_stack *b)
 	}
 }
 
-void	set_cheapest(t_stack *b)
+static void	set_cheapest(t_stack *b)
 {
 	long	best_match_value;
 	t_stack	*best_match_node;

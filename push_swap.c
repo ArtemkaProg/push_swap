@@ -31,8 +31,8 @@ void	push_swap(t_stack **a, t_stack **b)
 	if (len_a <= 3)
 		tiny_sort(a);
 	else if (len_a > 3 && len_a <= 5)
-		(void)b; // handle_five 
-	else if (len_a > 5 && len_a <= 10)
+		handle_five(a, b);
+	else if (len_a > 5 && len_a <= 50)
 		medium_sort(a, b, len_a);
 	else
 		radix_sort(a, b);

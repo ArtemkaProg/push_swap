@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-t_stack	*return_cheapest(t_stack *b)
+static t_stack	*return_cheapest(t_stack *b)
 {
 	int	cheapest_value;
 	t_stack	*cheapest;
@@ -41,9 +41,9 @@ void	medium_sort(t_stack **a, t_stack **b, int len_a)
 {
 	t_stack	*smallest;
 
-	while (len_a-- > 3)
+	while (len_a-- > 5)
 		pb(b, a, 1);
-	tiny_sort(a);
+	handle_five(a, b);
 	while (*b)
 	{
 		init_nodes(*a, *b);
