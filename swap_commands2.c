@@ -6,13 +6,13 @@
 /*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 19:02:17 by avalchuk          #+#    #+#             */
-/*   Updated: 2026/05/22 13:09:35 by avalchuk         ###   ########.fr       */
+/*   Updated: 2026/05/26 14:48:05 by madebros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sb(t_stack **b, int display)
+void	sb(t_stack **b, int display, t_counter *counter)
 {
 	t_stack	*first;
 	t_stack	*second;
@@ -23,16 +23,18 @@ void	sb(t_stack **b, int display)
 	second = first->next;
 	first->next = second->next;
 	first->prev = second;
-	if (second->prev)
+	if (second->next)
 		second->next->prev = first;
 	second->next = first;
 	second->prev = NULL;
 	*b = second;
-	if (display)
+	if (display && counter && !counter->bench)
 		write(1, "sb\n", 3);
+	else if (counter)
+		counter->sb++;
 }
 
-void	pb(t_stack **b, t_stack **a, int display)
+void	pb(t_stack **b, t_stack **a, int display, t_counter *c)
 {
 	t_stack	*temp;
 
@@ -47,11 +49,13 @@ void	pb(t_stack **b, t_stack **a, int display)
 	if (*b)
 		(*b)->prev = temp;
 	*b = temp;
-	if (display)
+	if (display && c && !c->bench)
 		write(1, "pb\n", 3);
+	else if (c)
+		c->pb++;
 }
 
-void	rb(t_stack **b, int display)
+void	rb(t_stack **b, int display, t_counter *c)
 {
 	t_stack	*first;
 	t_stack	*last;
@@ -65,11 +69,13 @@ void	rb(t_stack **b, int display)
 	first->next = NULL;
 	first->prev = last;
 	last->next = first;
-	if (display)
+	if (display && c && !c->bench)
 		write(1, "rb\n", 3);
+	else if (c)
+		c->rb++;
 }
 
-void	rrb(t_stack **b, int display)
+void	rrb(t_stack **b, int display, t_counter *c)
 {
 	t_stack	*first;
 	t_stack	*last;
@@ -83,6 +89,8 @@ void	rrb(t_stack **b, int display)
 	last->next = first;
 	first->prev = last;
 	*b = last;
-	if (display)
+	if (display && c && !c->bench)
 		write(1, "rrb\n", 4);
+	else if (c)
+		c->rrb++;
 }

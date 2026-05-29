@@ -1,11 +1,11 @@
 #include "push_swap.h"
 
-int compute_disorder(t_stack *a)
+int	compute_disorder(t_stack *a)
 {
 	t_stack	*current_i;
 	t_stack	*current_j;
-	int	mistakes;
-	int	total_pairs;
+	int		mistakes;
+	int		total_pairs;
 
 	current_i = a;
 	mistakes = 0;
@@ -36,15 +36,15 @@ int	check_sort(t_stack *a)
 	return (1);
 }
 
-void	tiny_sort(t_stack **a) // <= 3 elements
+void	tiny_sort(t_stack **a, t_counter *c) // <= 3 elements
 {
 	t_stack	*highest_node;
 
 	highest_node = find_highest(*a);
 	if (*a == highest_node)
-		ra(a, 1);
+		ra(a, 1, c);
 	else if ((*a)->next == highest_node)
-		rra(a, 1);
+		rra(a, 1, c);
 	if ((*a)->value > (*a)->next->value)
-		sa(a, 1);
+		sa(a, 1, c);
 }

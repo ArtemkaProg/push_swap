@@ -6,7 +6,7 @@
 /*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 19:01:50 by avalchuk          #+#    #+#             */
-/*   Updated: 2026/05/22 15:42:53 by avalchuk         ###   ########.fr       */
+/*   Updated: 2026/05/27 17:19:05 by madebros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,31 @@
 # include <limits.h>
 # include <stdlib.h>
 
+typedef struct s_config
+{
+	int	bench;
+	int	selection;
+	int	adaptive;
+	int	split;
+	int	index;
+	int	disorder;
+}		t_config;
 
+typedef struct s_counter
+{
+	int	bench;
+	int	sa;
+	int	sb;
+	int	ss;
+	int	pa;
+	int	pb;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+}		t_counter;
 
 typedef struct s_stack
 {
@@ -31,6 +55,13 @@ typedef struct s_stack
 	struct s_stack	*next;
 	struct s_stack	*target_node;
 }			t_stack;
+
+// partie de mattiu tkt bg
+
+int     args_controller(int ac, char **av, t_config *config);
+void    init_config(t_config *config);
+void    init_counter(t_counter *counter, t_config *config);
+void    write_benchmarck(t_config *config, t_counter *c, t_stack *a);
 
 // utils.c
 
@@ -54,34 +85,36 @@ t_stack	*find_highest(t_stack *a);
 
 // swap_commands*.c
 
-void	sa(t_stack **a, int display);
-void	pa(t_stack **a, t_stack **b, int display);
-void	ra(t_stack **a, int display);
-void	rra(t_stack **a, int display);
+void	sa(t_stack **a, int display, t_counter *c);
+void	pa(t_stack **a, t_stack **b, int display, t_counter *c);
+void	ra(t_stack **a, int display, t_counter *c);
+void	rra(t_stack **a, int display, t_counter *c);
 
-void	sb(t_stack **b, int display);
-void	pb(t_stack **b, t_stack **a, int display);
-void	rb(t_stack **b, int display);
-void	rrb(t_stack **b, int display);
+void    sb(t_stack **b, int display, t_counter *counter);
+void	pb(t_stack **b, t_stack **a, int display, t_counter *c);
+void	rb(t_stack **b, int display, t_counter *c);
+void	rrb(t_stack **b, int display, t_counter *c);
 
-void	ss(t_stack **a, t_stack **b, int display);
-void	rr(t_stack **a, t_stack **b, int display);
-void	rrr(t_stack **a, t_stack **b, int display);
+void	ss(t_stack **a, t_stack **b, int display, t_counter *c);
+void	rr(t_stack **a, t_stack **b, int display, t_counter *c);
+void	rrr(t_stack **a, t_stack **b, int display, t_counter *c);
 
 // sort.c
 
-void	push_swap(t_stack **a, t_stack **b);
+void	push_swap(t_stack **a, t_stack **b, t_config *config, t_counter *c);
 int		check_sort(t_stack *a);
 int		compute_disorder(t_stack *a);
-void	tiny_sort(t_stack **a);
+void	tiny_sort(t_stack **a, t_counter *c);
 
 // handle_five.c
 
-void	handle_five(t_stack **a, t_stack **b);
+void	handle_five(t_stack **a, t_stack **b, t_counter *c);
 
+// simple_sort.c
+
+void	simple_sort(t_stack **a, t_stack **b, t_counter *c);
 
 ////// MEDIUM SORTING //////
-
 
 // medium_init.c
 
@@ -90,17 +123,17 @@ void	set_current_position(t_stack *stack);
 
 // medium rotating.c
 
-void	finish_rotation(t_stack **stack, t_stack *top_node, char stack_name);
-void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
-void	reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
+void	finish_rotation(t_stack **stack, t_stack *top_node, char stack_name, t_counter *c);
+void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node, t_counter *c);
+void	reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node, t_counter *c);
 
 // medium_sort.c
 
-void	medium_sort(t_stack **a, t_stack **b, int len_a);
-void	move_nodes(t_stack **a, t_stack **b);
+void	medium_sort(t_stack **a, t_stack **b, int len_a, t_counter *c);
+void	move_nodes(t_stack **a, t_stack **b, t_counter *c);
 
 ////// RADIX SORTING //////
 
-void    radix_sort(t_stack **a, t_stack **b);
+void	radix_sort(t_stack **a, t_stack **b, t_counter *c);
 
 #endif

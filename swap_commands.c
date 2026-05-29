@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	sa(t_stack **a, int display)
+void	sa(t_stack **a, int display, t_counter *c)
 {
 	t_stack	*first;
 	t_stack	*second;
@@ -23,15 +23,18 @@ void	sa(t_stack **a, int display)
 	second = first->next;
 	first->next = second->next;
 	first->prev = second;
-	if (second->prev)
+	if (second->next)
 		second->next->prev = first;
 	second->next = first;
 	second->prev = NULL;
-	if (display)*a = second;
+	*a = second;
+	if (display && c && !c->bench)
 		write(1, "sa\n", 3);
+	else if (c)
+		c->sa++;
 }
 
-void	pa(t_stack **a, t_stack **b, int display)
+void	pa(t_stack **a, t_stack **b, int display, t_counter *c)
 {
 	t_stack	*temp;
 
@@ -46,11 +49,13 @@ void	pa(t_stack **a, t_stack **b, int display)
 	if (*a)
 		(*a)->prev = temp;
 	*a = temp;
-	if (display)
+	if (display && c && !c->bench)
 		write(1, "pa\n", 3);
+	else if (c)
+		c->pa++;
 }
 
-void	ra(t_stack **a, int display)
+void	ra(t_stack **a, int display, t_counter *c)
 {
 	t_stack	*first;
 	t_stack	*last;
@@ -64,11 +69,13 @@ void	ra(t_stack **a, int display)
 	first->next = NULL;
 	first->prev = last;
 	last->next = first;
-	if (display)
+	if (display && c && !c->bench)
 		write(1, "ra\n", 3);
+	else if (c)
+		c->ra++;
 }
 
-void	rra(t_stack **a, int display)
+void	rra(t_stack **a, int display, t_counter *c)
 {
 	t_stack	*first;
 	t_stack	*last;
@@ -82,6 +89,8 @@ void	rra(t_stack **a, int display)
 	last->next = first;
 	first->prev = last;
 	*a = last;
-	if (display)
+	if (display && c && !c->bench)
 		write(1, "rra\n", 4);
+	else if (c)
+		c->rra++;
 }

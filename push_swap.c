@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: madebros <madebros@learner.42.tech>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/25 11:43:50 by madebros          #+#    #+#             */
+/*   Updated: 2026/05/27 17:03:43 by madebros         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	display_stacks(t_stack *a, t_stack *b)
@@ -16,26 +28,48 @@ void	display_stacks(t_stack *a, t_stack *b)
 	}
 }
 
-void	push_swap(t_stack **a, t_stack **b)
+void	adaptive_auto(t_stack **a, t_stack **b, t_config *config, t_counter *c)
+{
+	int	ratio;
+	int	len_a;
+
+	len_a = stack_len(*a);
+	ratio = ((config->disorder * 100 * 100) / (len_a * (len_a - 1) / 2) / 100);
+	if (ratio < 20)
+	{
+		config->adaptive = 1;
+		simple_sort(a, b, c);
+	}
+	else if (ratio >= 20 && ratio < 50)
+	{
+		config->adaptive = 2;
+		medium_sort(a, b, len_a, c);
+	}
+	else
+	{
+		config->adaptive = 3;
+		radix_sort(a, b, c);
+	}
+}
+
+void	push_swap(t_stack **a, t_stack **b, t_config *config, t_counter *c)
 {
 	int	is_sorted;
 	int	len_a;
-	
+
 	(void)b;
 	is_sorted = check_sort(*a);
-	ft_printf(is_sorted ? "Sorted\n" : "Not sorted\n");
-	ft_printf("Disorder: %d\n\n", compute_disorder(*a));
 	len_a = stack_len(*a);
 	if (is_sorted)
 		return ;
-	if (len_a <= 3)
-		tiny_sort(a);
-	else if (len_a > 3 && len_a <= 5)
-		handle_five(a, b);
-	else if (len_a > 5 && len_a <= 50)
-		medium_sort(a, b, len_a);
-	else
-		radix_sort(a, b);
+	if (config->selection == 1)
+		simple_sort(a, b, c);
+	if (config->selection == 2)
+		medium_sort(a, b, len_a, c);
+	if (config->selection == 3)
+		radix_sort(a, b, c);
+	if (config->selection == 4)
+		adaptive_auto(a, b, config, c);
 }
 
 int	main(int args, char **argv)
@@ -43,23 +77,26 @@ int	main(int args, char **argv)
 	t_stack *a = NULL;
 	t_stack *b = NULL;
 	char	**split;
+	t_config config;
+	t_counter counter;
 
-	split = NULL;
-	if (args == 1 || (args == 2 && !argv[1][0]))
-	{
-		ft_printf("Error: invalid input\n");
+	init_config(&config);
+	if (args_controller(args, argv, &config) < 0)
 		return (0);
-	}
-	else if (args == 2)
+	init_counter(&counter, &config);
+	if (config.split)
 	{
-		split = ft_split(argv[1], ' ');
+		split = ft_split(argv[config.index], ' ');
 		stack_init(&a, split);
 		free_split(split);
 	}
 	else
-		stack_init(&a, argv + 1);
+		stack_init(&a, argv + config.index);
 	if (a == NULL)
 		return (0);
-	push_swap(&a, &b);
-	display_stacks(a, b);
+	config.disorder = compute_disorder(a);
+	push_swap(&a, &b, &config, &counter);
+	if (config.bench)
+		write_benchmarck(&config, &counter, a);
+	return (0);
 }

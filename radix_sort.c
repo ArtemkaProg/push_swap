@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static void    fill_array(t_stack *a, int *tab)
+static void	fill_array(t_stack *a, int *tab)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ static void	assign_indexes(t_stack *a, int *tab, int len)
 			if (a->value == tab[i])
 			{
 				a->index = i;
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -71,7 +71,7 @@ static int	get_max_bits(int len_tab)
 	return (max_bits);
 }
 
-void    radix_sort(t_stack **a, t_stack **b)
+void	radix_sort(t_stack **a, t_stack **b, t_counter *c)
 {
 	int	len_tab;
 	int	*tab;
@@ -79,7 +79,7 @@ void    radix_sort(t_stack **a, t_stack **b)
 	int	i;
 	int	len;
 	int	max_bits;
-	
+
 	len_tab = stack_len(*a);
 	tab = malloc(len_tab * sizeof(int));
 	if (!tab)
@@ -97,12 +97,12 @@ void    radix_sort(t_stack **a, t_stack **b)
 		while (i++ < len)
 		{
 			if (((*a)->index >> bit & 1) == 0)
-				pb(b, a, 1);
+				pb(b, a, 1, c);
 			else
-				ra(a, 1);
+				ra(a, 1, c);
 		}
 		while (*b)
-			pa(a, b, 1);
+			pa(a, b, 1, c);
 		bit++;
 	}
 }
