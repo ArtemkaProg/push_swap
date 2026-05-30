@@ -126,8 +126,10 @@ int	args_controller(int ac, char **av, t_config *config)
 			break ;
 		i++;
 	}
-	if ((!av[i]) || (av[i] && !is_valide(av[i])))
+	if ((!av[i]))
 		return (-4);
+	if ((av[i] && !is_valide(av[i])))
+		return (error(-2, "blabla je suis une patate"));
 	config->index = i;
 	int (j) = 0;
 	if (av[i])
