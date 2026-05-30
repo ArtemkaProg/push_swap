@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_error.h"
 
-int	handle_hex(va_list *ap, int uppercase)
+int	error_handle_hex(va_list *ap, int uppercase)
 {
 	char	*res;
 	int		len;
 
-	res = convert_base_hex(va_arg(*ap, unsigned int));
+	res = error_convert_base_hex(va_arg(*ap, unsigned int));
 	if (!res)
 	{
-		ft_putstr("(null)");
+		error_ft_putstr("(null)");
 		return (6);
 	}
 	if (uppercase)
-		ft_strupper_hex(res);
-	len = ft_putstr(res);
+		error_ft_strupper_hex(res);
+	len = error_ft_putstr(res);
 	free(res);
 	return (len);
 }
 
-int	handle_pointer(va_list *ap)
+int	error_handle_pointer(va_list *ap)
 {
 	char			*res;
 	int				len;
@@ -39,24 +39,24 @@ int	handle_pointer(va_list *ap)
 	n = (unsigned long)va_arg(*ap, void *);
 	if (!n)
 	{
-		ft_putstr("(nil)");
+		error_ft_putstr("(nil)");
 		return (5);
 	}
-	res = convert_base_hex(n);
+	res = error_convert_base_hex(n);
 	if (!res)
 	{
-		ft_putstr("(null)");
+		error_ft_putstr("(null)");
 		return (6);
 	}
-	len = ft_putstr("0x") + ft_putstr(res);
+	len = error_ft_putstr("0x") + error_ft_putstr(res);
 	free(res);
 	return (len);
 }
 
-int	handle_unsigneddecimal(va_list *ap)
+int	error_handle_unsigneddecimal(va_list *ap)
 {
 	unsigned int	res;
 
 	res = (unsigned int)va_arg(*ap, unsigned int);
-	return (ft_putnbr(res));
+	return (error_ft_putnbr(res));
 }

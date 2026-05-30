@@ -4,3 +4,8 @@ a.exe
 a.out
 push_swap
 push_swap.exe
+*.txt
+*.out
+checker_os
+fedora_checker
+ubuntu_checker

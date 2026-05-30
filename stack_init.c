@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "ft_printf_error/ft_printf_error.h"
 
 int     error_syntax(char *str)
 {
@@ -77,20 +78,20 @@ void	stack_init(t_stack **a, char **split)
 		
 		if (error_syntax(*split))
         {
-            ft_printf("Error: syntax\n");
+            ft_printf_error("Error: syntax\n");
         	free_stack(a);
             return ;
         }
 		nbr = ft_atol(*split);
 		if (nbr > INT_MAX || nbr < INT_MIN)
 		{
-			ft_printf("Error: overflows int\n");
+			ft_printf_error("Error: overflows int\n");
 			free_stack(a);
 			return ;
 		}
 		if (error_repetition(*a, (int)nbr))
 		{
-			ft_printf("Error: repetition\n");
+			ft_printf_error("Error: repetition\n");
 			free_stack(a);
 			return ;
 		}

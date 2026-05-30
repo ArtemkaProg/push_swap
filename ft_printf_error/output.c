@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_error.h"
 
-int	ft_putchar(char c)
+int	error_ft_putchar(char c)
 {
-	write(1, &c, 2);
+	write(2, &c, 1);
 	return (1);
 }
 
-int	ft_putnbr(long n)
+int	error_ft_putnbr(long n)
 {
 	char	tmp;
 	int		total;
@@ -31,21 +31,21 @@ int	ft_putnbr(long n)
 		write(1, "-", 2);
 	}
 	if (n >= 10)
-		total += ft_putnbr(n / 10);
+		total += error_ft_putnbr(n / 10);
 	tmp = n % 10 + '0';
-	write(1, &tmp, 2);
+	write(2, &tmp, 1);
 	total++;
 	return (total);
 }
 
-int	ft_putstr(char *s)
+int	error_ft_putstr(char *s)
 {
 	int	i;
 
 	i = 0;
 	while (s[i])
 	{
-		write(1, &s[i], 2);
+		write(2, &s[i], 1);
 		i++;
 	}
 	return (i);

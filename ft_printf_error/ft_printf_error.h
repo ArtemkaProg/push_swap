@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_ERROR_H
+# define FT_PRINTF_ERROR_H
 
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-int		ft_printf(const char *fmt, ...);
-int		dispatch(char specifier, va_list *ap);
-int		handle_unsigneddecimal(va_list *ap);
-int		handle_pointer(va_list *ap);
-int		handle_hex(va_list *ap, int uppercase);
-int		handle_str(va_list *ap);
-int		handle_char(va_list *ap);
-int		handle_int(va_list *ap);
-void	ft_strupper_hex(char *s);
-int		ft_putstr(char *s);
-int		ft_putnbr(long n);
-int		ft_putchar(char c);
-char	*convert_base_hex(unsigned long n);
-char	get_hex(int i);
-int		get_hex_len(unsigned long n);
+int		ft_printf_error(const char *fmt, ...);
+int	error_dispatch(char specifier, va_list *ap);
+int	error_handle_unsigneddecimal(va_list *ap);
+int	error_handle_pointer(va_list *ap);
+int	error_handle_hex(va_list *ap, int uppercase);
+int	error_handle_str(va_list *ap);
+int	error_handle_char(va_list *ap);
+int	error_handle_int(va_list *ap);
+void	error_ft_strupper_hex(char *s);
+int	error_ft_putstr(char *s);
+int	error_ft_putnbr(long n);
+int	error_ft_putchar(char c);
+char	*error_convert_base_hex(unsigned long n);
+char	error_get_hex(int i);
+int	error_get_hex_len(unsigned long n);
 
 #endif

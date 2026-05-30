@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 #include "ft_printf/ft_printf.h"
+#include "ft_printf_error/ft_printf_error.h"
 
 void	init_config(t_config *config)
 {
@@ -80,7 +81,7 @@ int	ft_strdigit(char *c)
 
 int	error(int code, char *reason)
 {
-	ft_printf("error : %s\n", reason);
+	ft_printf_error("Error : %s\n", reason);
 	return (code);
 }
 
@@ -121,7 +122,7 @@ int	args_controller(int ac, char **av, t_config *config)
 	if ((!av[i]))
 		return (-4);
 	if ((av[i] && !is_valide(av[i])))
-		return (error(-2, "blabla je suis une patate"));
+		return (error(-2, "arguments"));
 	config->index = i;
 	int (j) = 0;
 	if (av[i])

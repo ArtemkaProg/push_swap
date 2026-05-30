@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_error.h"
 
-int	get_hex_len(unsigned long n)
+int	error_get_hex_len(unsigned long n)
 {
 	int	len;
 
@@ -27,7 +27,7 @@ int	get_hex_len(unsigned long n)
 	return (len);
 }
 
-char	get_hex(int i)
+char	error_get_hex(int i)
 {
 	char	*base;
 
@@ -37,19 +37,19 @@ char	get_hex(int i)
 	return (base[i]);
 }
 
-char	*convert_base_hex(unsigned long n)
+char	*error_convert_base_hex(unsigned long n)
 {
 	char	*res;
 	int		len;
 
-	len = get_hex_len(n);
+	len = error_get_hex_len(n);
 	res = malloc(len + 1);
 	if (!res)
 		return (NULL);
 	res[len--] = '\0';
 	while (len >= 0)
 	{
-		res[len] = get_hex(n % 16);
+		res[len] = error_get_hex(n % 16);
 		if (res[len] == 'x')
 		{
 			free(res);
@@ -61,7 +61,7 @@ char	*convert_base_hex(unsigned long n)
 	return (res);
 }
 
-void	ft_strupper_hex(char *s)
+void	error_ft_strupper_hex(char *s)
 {
 	while (*s)
 	{

@@ -1,8 +1,8 @@
-NAME = libftprintf.a
+NAME = libftprintf_error.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I.
 
-SRCS = ft_printf.c handlers.c handlers2.c helpers.c output.c
+SRCS = ft_printf_error.c handlers.c handlers2.c helpers.c output.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

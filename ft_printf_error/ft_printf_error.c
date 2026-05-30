@@ -10,26 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_error.h"
 
-int	dispatch(char specifier, va_list *ap)
+int	error_dispatch(char specifier, va_list *ap)
 {
 	if (specifier == 'd')
-		return (handle_int(ap));
+		return (error_handle_int(ap));
 	if (specifier == 'i')
-		return (handle_int(ap));
+		return (error_handle_int(ap));
 	if (specifier == 'c')
-		return (handle_char(ap));
+		return (error_handle_char(ap));
 	if (specifier == 's')
-		return (handle_str(ap));
+		return (error_handle_str(ap));
 	if (specifier == 'x')
-		return (handle_hex(ap, 0));
+		return (error_handle_hex(ap, 0));
 	if (specifier == 'X')
-		return (handle_hex(ap, 1));
+		return (error_handle_hex(ap, 1));
 	if (specifier == 'p')
-		return (handle_pointer(ap));
+		return (error_handle_pointer(ap));
 	if (specifier == 'u')
-		return (handle_unsigneddecimal(ap));
+		return (error_handle_unsigneddecimal(ap));
 	if (specifier == '%')
 	{
 		write(1, "%", 1);
@@ -38,7 +38,7 @@ int	dispatch(char specifier, va_list *ap)
 	return (0);
 }
 
-int	is_format(char c)
+int	error_is_format(char c)
 {
 	char	*s;
 
@@ -52,7 +52,7 @@ int	is_format(char c)
 	return (0);
 }
 
-int	ft_printf(const char *fmt, ...)
+int	ft_printf_error(const char *fmt, ...)
 {
 	va_list	ap;
 	int		total;
@@ -61,10 +61,10 @@ int	ft_printf(const char *fmt, ...)
 	va_start(ap, fmt);
 	while (*fmt)
 	{
-		if (*fmt == '%' && is_format(*(fmt + 1)))
+		if (*fmt == '%' && error_is_format(*(fmt + 1)))
 		{
 			fmt++;
-			total += dispatch(*fmt, &ap);
+			total += error_dispatch(*fmt, &ap);
 		}
 		else
 		{
