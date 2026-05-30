@@ -72,6 +72,14 @@ void	push_swap(t_stack **a, t_stack **b, t_config *config, t_counter *c)
 		adaptive_auto(a, b, config, c);
 }
 
+void	zero_no_quote(t_config *config, t_counter *c, t_stack *a)
+{
+	config->disorder = 0;
+	if (config->bench)
+		write_benchmarck(config, c, a);
+	exit(0);
+}
+
 int	main(int args, char **argv)
 {
 	t_stack *a = NULL;
@@ -81,9 +89,12 @@ int	main(int args, char **argv)
 	t_counter counter;
 
 	init_config(&config);
-	if (args_controller(args, argv, &config) < 0)
+	int (arg_res) = args_controller(args, argv, &config);
+	if (arg_res == -2)
 		return (0);
 	init_counter(&counter, &config);
+	if (arg_res == -4)
+		zero_no_quote(&config, &counter, a);
 	if (config.split)
 	{
 		split = ft_split(argv[config.index], ' ');

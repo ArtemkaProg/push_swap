@@ -86,28 +86,28 @@ int	ft_strdigit(char *c)
 	return (0);
 }
 
-int	error(int code)
+int	error(int code, char *reason)
 {
-	ft_printf("error");
+	ft_printf("error : %s\n", reason);
 	return (code);
 }
 
-int	minus_two_check(int code, int target, char **argv)
+int	minus_two_check(int code, int target, char **argv, char *reason)
 {
 	if (!argv[target][0])
-		return (error(-2));
+		return (error(-2, reason));
 	else
 		return (code);
 }
 
 int	args_controller(int ac, char **av, t_config *config)
 {
-	if (ac <= 1)
-		return (error(-1));
+	// if (ac <= 1)
+	// 	return (error(-1));
 	int (i) = 1;
 	while (i < ac)
 	{
-		if (!ft_isdigit(av[i][0]))
+		if (!ft_isdigit(av[i][0]) && av[i][0] != '\0')
 		{
 			if (!ft_strncmp("--bench", av[i], 99))
 				config->bench = 1;
@@ -120,14 +120,14 @@ int	args_controller(int ac, char **av, t_config *config)
 			else if (!ft_strncmp("--adaptive", av[i], 99))
 				config->selection = 4;
 			else
-				return (error(-2));
+				return (error(-2, "ce flag existe pas"));
 		}
 		else
 			break ;
 		i++;
 	}
 	if ((!av[i]) || (av[i] && !is_valide(av[i])))
-		return (error(-2));
+		return (-4);
 	config->index = i;
 	int (j) = 0;
 	if (av[i])
@@ -140,8 +140,8 @@ int	args_controller(int ac, char **av, t_config *config)
 		}
 	}
 	else
-		return (error(-2));
-	return (minus_two_check(1, i - 1, av));
+		return (error(-2, "la boucle check"));
+	return (/*minus_two_check(1, i - 1, av)*/ 1);
 }
 
 /*
