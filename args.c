@@ -6,7 +6,7 @@
 /*   By: madebros <madebros@learner.42.tech>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 13:08:44 by madebros          #+#    #+#             */
-/*   Updated: 2026/05/27 17:21:52 by madebros         ###   ########.fr       */
+/*   Updated: 2026/05/30 16:00:27 by avalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,11 @@ size_t	ft_strlen(const char *s)
 	return (res);
 }
 
-
-int	ft_isdigit(int c)
-{
-	if ((c >= '0' && c <= '9'))
-		return (1);
-	return (0);
-}
-
 int	is_valide(char *str)
 {
 	while (*str)
 	{
-		if (!ft_isdigit(*str) && *str != ' ')
+		if (!ft_isdigit(*str) && *str != ' ' && *str != '-')
 			return (0);
 		str++;
 	}
@@ -107,7 +99,7 @@ int	args_controller(int ac, char **av, t_config *config)
 	int (i) = 1;
 	while (i < ac)
 	{
-		if (!ft_isdigit(av[i][0]) && av[i][0] != '\0')
+		if ((av[i][0] == '-' && av[i][1] == '-'))
 		{
 			if (!ft_strncmp("--bench", av[i], 99))
 				config->bench = 1;
@@ -136,7 +128,7 @@ int	args_controller(int ac, char **av, t_config *config)
 	{
 		while (av[i][j])
 		{
-			if (!ft_isdigit(av[i][j]))
+			if (!ft_isdigit(av[i][j]) && av[i][j] != '-')
 				config->split = 1;
 			j++;
 		}

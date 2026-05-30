@@ -97,7 +97,7 @@ void	write_benchmarck(t_config *config, t_counter *c, t_stack *a)
 	ft_printf("[bench] sa: %d sb: %d ss: %d", c->sa, c->sb, c->ss);
 	ft_printf(" pa: %d, pb: %d\n[bench] ", c->pa, c->pb);
 	ft_printf("ra: %d rb: %d rr: %d rra: %d", c->ra, c->rb, c->rr, c->rra);
-	ft_printf(" rrb: %d rrr: %d", c->rrb, c->rrr);
+	ft_printf(" rrb: %d rrr: %d\n", c->rrb, c->rrr);
 }
 
 /*

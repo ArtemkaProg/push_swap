@@ -12,10 +12,22 @@
 
 #include "push_swap.h"
 
-/*int	error_syntax(char *nbr)
+int     error_syntax(char *str)
 {
-	return (1);
-}*/
+        // if (!str || *str == '\0')
+        //         return (1);
+        if ((*str == '-' || *str == '+') && !*(str + 1))
+                return (1);
+        if (*str == '-' || *str == '+')
+                str++;
+        while (*str)
+        {
+                if (!ft_isdigit(*str))
+                        return (1);
+                str++;
+        }
+        return (0);
+}
 
 int	error_repetition(t_stack *a, int nbr)
 {
@@ -59,13 +71,16 @@ void	free_split(char **split)
 void	stack_init(t_stack **a, char **split)
 {
 	long	nbr;
-	// int		i;
 
-	// i = 0;	
 	while (*split)
 	{
-		// if (error_syntax(argv[i])) // not done
-		//	return ; //error_free
+		
+		if (error_syntax(*split))
+        {
+            ft_printf("Error: syntax\n");
+        	free_stack(a);
+            return ;
+        }
 		nbr = ft_atol(*split);
 		if (nbr > INT_MAX || nbr < INT_MIN)
 		{

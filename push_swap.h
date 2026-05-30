@@ -6,7 +6,7 @@
 /*   By: avalchuk <avalchuk@learner.42.tech>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 19:01:50 by avalchuk          #+#    #+#             */
-/*   Updated: 2026/05/27 17:19:05 by madebros         ###   ########.fr       */
+/*   Updated: 2026/05/30 15:59:20 by avalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void    write_benchmarck(t_config *config, t_counter *c, t_stack *a);
 
 // utils.c
 
+int	ft_isdigit(char c);
 char	**ft_split(char const *s, char c);
 long	ft_atol(const char *nptr);
 
