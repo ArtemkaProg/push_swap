@@ -49,16 +49,16 @@ t_stack	*find_smallest(t_stack *a)
 	return (smallest);
 }
 
-void	append_node(t_stack **stack, int nbr)
+int	append_node(t_stack **stack, int nbr)
 {
 	t_stack	*last_node;
 	t_stack	*new_node;
 
 	if (stack == NULL)
-		return ;
+		return (0);
 	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
-		return ;
+		return (0);
 	new_node->value = nbr;
 	new_node->next = NULL;
 	if (*stack == NULL)
@@ -72,11 +72,12 @@ void	append_node(t_stack **stack, int nbr)
 		if (!last_node)
 		{
 			free(new_node);
-			return ;
+			return (0);
 		}
 		last_node->next = new_node;
 		new_node->prev = last_node;
 	}
+	return (1);
 }
 
 int	stack_len(t_stack *stack)

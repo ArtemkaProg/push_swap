@@ -28,7 +28,7 @@ void	init_counter(t_counter *counter, t_config *config)
 	counter->rrr = 0;
 }
 
-int	total_counter(t_counter *counter)
+static int	total_counter(t_counter *counter)
 {
 	int	res;
 
@@ -47,7 +47,7 @@ int	total_counter(t_counter *counter)
 	return (res);
 }
 
-void	print_float(t_config *config, t_stack *a)
+static void	print_float(t_config *config, t_stack *a)
 {
 	int	huge;
 	int	modulo;
@@ -67,7 +67,7 @@ void	print_float(t_config *config, t_stack *a)
 		ft_printf("%d.%d%\n", huge / 100, modulo);
 }
 
-void	print_methode(t_config *config)
+static void	print_methode(t_config *config)
 {
 	if (config->adaptive == 1 || !config->adaptive)
 		ft_printf("O(n2)\n");

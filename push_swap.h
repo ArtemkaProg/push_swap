@@ -79,7 +79,7 @@ void	stack_init(t_stack **a, char **split);
 // stack_utils.c
 
 t_stack	*ft_stacklast(t_stack *a);
-void	append_node(t_stack **stack, int nbr);
+int	append_node(t_stack **stack, int nbr);
 int		stack_len(t_stack *stack);
 t_stack	*find_smallest(t_stack *a);
 t_stack	*find_highest(t_stack *a);

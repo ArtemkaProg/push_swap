@@ -36,7 +36,7 @@ int	check_sort(t_stack *a)
 	return (1);
 }
 
-void	tiny_sort(t_stack **a, t_counter *c) // <= 3 elements
+void	tiny_sort(t_stack **a, t_counter *c)
 {
 	t_stack	*highest_node;
 

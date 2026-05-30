@@ -24,7 +24,7 @@ void	init_config(t_config *config)
 	config->disorder = -1;
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+static int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t			i;
 	unsigned char	*cs1;
@@ -44,17 +44,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (cs1[i] - cs2[i]);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	int	res;
-
-	res = 0;
-	while (s[res] != '\0')
-		res++;
-	return (res);
-}
-
-int	is_valide(char *str)
+static int	is_valide(char *str)
 {
 	while (*str)
 	{
@@ -79,7 +69,7 @@ int	ft_strdigit(char *c)
 	return (0);
 }
 
-int	error(int code, char *reason)
+static int	error(int code, char *reason)
 {
 	ft_printf_error("Error : %s\n", reason);
 	return (code);

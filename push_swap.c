@@ -12,22 +12,6 @@
 
 #include "push_swap.h"
 
-void	display_stacks(t_stack *a, t_stack *b)
-{
-	ft_printf("stack a:\n");
-	while (a)
-	{
-		ft_printf("%d ", a->value);
-		a = a->next;
-	}
-	ft_printf("\nstack b:\n");
-	while (b)
-	{
-		ft_printf("%d ", b->value);
-		b = b->next;
-	}
-}
-
 void	adaptive_auto(t_stack **a, t_stack **b, t_config *config, t_counter *c)
 {
 	int	ratio;
@@ -57,7 +41,6 @@ void	push_swap(t_stack **a, t_stack **b, t_config *config, t_counter *c)
 	int	is_sorted;
 	int	len_a;
 
-	(void)b;
 	is_sorted = check_sort(*a);
 	len_a = stack_len(*a);
 	if (is_sorted)
@@ -72,7 +55,7 @@ void	push_swap(t_stack **a, t_stack **b, t_config *config, t_counter *c)
 		adaptive_auto(a, b, config, c);
 }
 
-void	zero_no_quote(t_config *config, t_counter *c, t_stack *a)
+static void	zero_no_quote(t_config *config, t_counter *c, t_stack *a)
 {
 	config->disorder = 0;
 	if (config->bench)
@@ -98,6 +81,8 @@ int	main(int args, char **argv)
 	if (config.split)
 	{
 		split = ft_split(argv[config.index], ' ');
+		if (!split)
+			return (0);
 		stack_init(&a, split);
 		free_split(split);
 	}
@@ -109,5 +94,7 @@ int	main(int args, char **argv)
 	push_swap(&a, &b, &config, &counter);
 	if (config.bench)
 		write_benchmarck(&config, &counter, a);
+	free_stack(&a);
+	free_stack(&b);
 	return (0);
 }

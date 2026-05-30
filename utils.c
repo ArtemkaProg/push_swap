@@ -79,6 +79,8 @@ char	**ft_split(char const *s, char c)
 
 	words = count_words(s, c);
 	strs = malloc((words + 1) * sizeof(char *));
+	if (!strs)
+		return (NULL);
 	i = 0;
 	current_word = 0;
 	while (current_word < words)
@@ -90,7 +92,15 @@ char	**ft_split(char const *s, char c)
 			i++;
 		strs[current_word] = ft_strdup(&s[start], i - start);
 		if (!strs[current_word])
+		{
+			while (current_word > 0)
+			{
+				current_word--;
+				free(strs[current_word]);
+			}
+			free(strs);
 			return (NULL);
+		}
 		current_word++;
 	}
 	strs[current_word] = NULL;

@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include "ft_printf_error/ft_printf_error.h"
 
-int     error_syntax(char *str)
+static int     error_syntax(char *str)
 {
         // if (!str || *str == '\0')
         //         return (1);
@@ -60,6 +60,8 @@ void	free_split(char **split)
 {
 	int		i;
 
+	if (!split)
+		return ;
 	i = 0;
 	while (split[i])
 	{
@@ -95,7 +97,12 @@ void	stack_init(t_stack **a, char **split)
 			free_stack(a);
 			return ;
 		}
-		append_node(a, (int)nbr);
+		if (!append_node(a, (int)nbr))
+		{
+			ft_printf_error("Error: allocation failure\n");
+			free_stack(a);
+			return ;
+		}
 		split++;
 	}
 }
